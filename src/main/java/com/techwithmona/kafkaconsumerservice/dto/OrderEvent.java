@@ -1,22 +1,21 @@
 package com.techwithmona.kafkaconsumerservice.dto;
 
-import java.time.Instant;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 public class OrderEvent {
+    @NotBlank
     private String orderId;
-    private String type;
+
+    @NotNull
+    private OrderEventType type;
+
+    @Min(value = 1 , message = "quantity must be more than 1")
     private int quantity;
-    private Instant timestamp;
 
-    public String getOrderId() { return orderId; }
-    public void setOrderId(String orderId) { this.orderId = orderId; }
-
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
-
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
-
-    public Instant getTimestamp() { return timestamp; }
-    public void setTimestamp(Instant timestamp) { this.timestamp = timestamp; }
+    @NotBlank
+    private String timestamp;
 }
